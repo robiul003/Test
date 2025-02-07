@@ -8,27 +8,42 @@ export default function ParticlesBackground() {
     };
 
     return (
-        <div className="particles-container">
-            <Particles
-                id="tsparticles"
-                init={particlesInit}
-                options={{
-                    fullScreen: { enable: false },
-                    particles: {
-                        number: { value: 80 },
-                        color: { value: "#ffffff" },
-                        shape: { type: "circle" },
-                        opacity: { value: 0.5, random: true },
-                        size: { value: 3, random: true },
-                        move: { speed: 2, random: true },
+        <Particles
+            id="tsparticles"
+            init={particlesInit}
+            options={{
+                background: {
+                    color: "#000"
+                },
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            area: 800
+                        }
                     },
-                    interactivity: {
-                        events: {
-                            onHover: { enable: true, mode: "repulse" },
-                        },
+                    color: { value: "#ffffff" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    move: { enable: true, speed: 2 },
+                },
+                interactivity: {
+                    events: {
+                        onHover: { enable: true, mode: "repulse" },
                     },
-                }}
-            />
-        </div>
+                },
+                detectRetina: true,
+            }}
+            style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100vh",
+                zIndex: 0,
+            }}
+        />
     );
 }
