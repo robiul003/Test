@@ -22,13 +22,18 @@ export default function Home() {
     ];
 
     // Search function with live preview
-    const handleSearch = (e) => {
-        const searchQuery = e.target.value.toLowerCase();
-        setSearch(searchQuery);
-        setSelectedPerson(null);
+    const handleSearch = () => {
+        const foundPerson = persons.find(
+            (person) => person.name.toLowerCase() === search.toLowerCase() || person.id === search
+        );
+        if (foundPerson) {
+            setSelectedPerson(foundPerson);
+        } else {
+            setSelectedPerson(null); // Reset if no match found
+        }
     };
 
-    // Filter results based on name or ID
+    // Filter results based on name or ID for live preview
     const filteredPersons = persons.filter(
         (person) =>
             person.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -38,7 +43,7 @@ export default function Home() {
     // Handle Enter key press
     const handleKeyPress = (e) => {
         if (e.key === "Enter") {
-            setSelectedPerson(filteredPersons[0]); // You can modify this to handle the selection logic
+            handleSearch(); // Trigger search on Enter key press
         }
     };
 
@@ -79,7 +84,7 @@ export default function Home() {
                 type="text"
                 placeholder="Name/ID"
                 value={search}
-                onChange={handleSearch}
+                onChange={(e) => setSearch(e.target.value)}
                 onKeyPress={handleKeyPress} // Listen for Enter key press
                 style={{
                     padding: "10px",
@@ -94,7 +99,7 @@ export default function Home() {
             />
 
             <button
-                onClick={() => setSelectedPerson(filteredPersons[0])} // For now, selecting first match
+                onClick={handleSearch}
                 style={{
                     padding: "10px 20px",
                     border: "none",
