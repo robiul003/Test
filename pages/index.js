@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import ParticleBackground from "../components/ParticleBackground";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -27,13 +26,7 @@ export default function Home() {
 
   return (
     <div className="container">
-      <Particles
-        init={loadFull}
-        options={{
-          background: { color: "#000" },
-          particles: { number: { value: 50 }, move: { enable: true, speed: 0.5 } } // Reduced speed to fix shaking
-        }}
-      />
+      <ParticleBackground />
       <h1 className="title">NAGGINS</h1>
       <p className="subtitle">It is what it is</p>
       <input
