@@ -4,6 +4,7 @@ import ParticlesBackground from "../components/ParticlesBackground"; // Import t
 export default function Home() {
     const [search, setSearch] = useState("");
     const [selectedPerson, setSelectedPerson] = useState(null);
+    const [error, setError] = useState(false);
 
     // Full data with Name, ID, Mail, Program, Semester, Section
     const persons = [
@@ -28,8 +29,10 @@ export default function Home() {
         );
         if (foundPerson) {
             setSelectedPerson(foundPerson);
+            setError(false); // Reset error if found
         } else {
             setSelectedPerson(null); // Reset if no match found
+            setError(true); // Set error state
         }
     };
 
@@ -116,6 +119,9 @@ export default function Home() {
                 SEARCH
             </button>
 
+            {/* Display error message if no result is found */}
+            {error && <p style={{ color: "red", fontWeight: "bold" }}>No Naggins Found</p>}
+
             <div>
                 {filteredPersons.length > 0 && (
                     <ul style={{ listStyle: "none", padding: 0, zIndex: 2, marginBottom: "20px" }}>
@@ -144,31 +150,38 @@ export default function Home() {
                     border: "1px solid #fff", 
                     padding: "10px", 
                     borderRadius: "5px",
+                    borderCollapse: "collapse", // Ensures borders are shared between cells
                 }}>
+                    <thead>
+                        <tr>
+                            <th style={{ border: "1px solid #fff", padding: "8px" }}>Attribute</th>
+                            <th style={{ border: "1px solid #fff", padding: "8px" }}>Details</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Name:</strong></td>
-                            <td>{selectedPerson.name}</td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>Name:</strong></td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}>{selectedPerson.name}</td>
                         </tr>
                         <tr>
-                            <td><strong>ID:</strong></td>
-                            <td>{selectedPerson.id}</td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>ID:</strong></td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}>{selectedPerson.id}</td>
                         </tr>
                         <tr>
-                            <td><strong>Mail:</strong></td>
-                            <td>{selectedPerson.mail}</td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>Mail:</strong></td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}>{selectedPerson.mail}</td>
                         </tr>
                         <tr>
-                            <td><strong>Program:</strong></td>
-                            <td>{selectedPerson.program}</td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>Program:</strong></td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}>{selectedPerson.program}</td>
                         </tr>
                         <tr>
-                            <td><strong>Semester:</strong></td>
-                            <td>{selectedPerson.semester}</td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>Semester:</strong></td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}>{selectedPerson.semester}</td>
                         </tr>
                         <tr>
-                            <td><strong>Section:</strong></td>
-                            <td>{selectedPerson.section}</td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>Section:</strong></td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}>{selectedPerson.section}</td>
                         </tr>
                     </tbody>
                 </table>
