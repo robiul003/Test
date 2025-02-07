@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -19,6 +21,23 @@ export default function Home() {
 
   return (
     <div style={styles.container}>
+      {/* Particle Background */}
+      <Particles
+        id="tsparticles"
+        init={loadFull}
+        options={{
+          background: { color: "#000" },
+          particles: {
+            number: { value: 80 },
+            size: { value: 3 },
+            move: { speed: 2 },
+            color: { value: "#ffffff" },
+            links: { enable: true, color: "#ffffff", opacity: 0.5 }
+          }
+        }}
+        style={styles.particles}
+      />
+
       <h1 style={styles.title}>NAGGINS</h1>
       <p style={styles.subtitle}>It is what it is</p>
       <p style={styles.updateText}>List are updating</p>
@@ -50,7 +69,6 @@ export default function Home() {
 const styles = {
   container: {
     textAlign: "center",
-    backgroundColor: "#000",
     color: "#fff",
     minHeight: "100vh",
     display: "flex",
@@ -58,23 +76,31 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     fontFamily: "Arial, sans-serif",
-    padding: "0", // Remove any unnecessary border effect
-    margin: "0"
+    position: "relative",
+    overflow: "hidden"
+  },
+  particles: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: -1
   },
   title: {
-    fontSize: "50px", // Increased size
-    fontWeight: "900", // Extra bold
+    fontSize: "50px",
+    fontWeight: "900",
     padding: "10px",
     marginBottom: "10px"
   },
   subtitle: {
-    fontSize: "22px", // Slightly larger
+    fontSize: "22px",
     marginBottom: "20px"
   },
   updateText: {
     textTransform: "uppercase",
     letterSpacing: "2px",
-    fontSize: "16px", // Proportionally increased
+    fontSize: "16px",
     marginBottom: "20px"
   },
   input: {
@@ -103,7 +129,7 @@ const styles = {
     display: "inline-block"
   },
   footer: {
-    marginTop: "auto", // Pushes footer to bottom
+    marginTop: "auto",
     fontSize: "14px",
     fontWeight: "bold",
     textAlign: "center"
