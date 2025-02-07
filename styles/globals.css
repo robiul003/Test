@@ -3,59 +3,53 @@ body {
     padding: 0;
     background-color: black;
     font-family: Arial, sans-serif;
-    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container {
     position: relative;
     text-align: center;
+    width: 100%;
+    max-width: 500px;
     padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
     z-index: 2;
 }
 
-.particles-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.title {
-    font-size: 4rem;
+h1 {
+    font-size: 3rem;
     font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
 }
 
-.subtitle {
+h2 {
     font-size: 1.5rem;
+    color: white;
     margin-bottom: 20px;
 }
 
 .search-container {
     position: relative;
-    width: 80%;
-    max-width: 400px;
-    z-index: 3; /* Ensures search box is above the background */
+    width: 100%;
 }
 
 .search-bar {
-    padding: 10px;
     width: 100%;
+    padding: 10px;
     border-radius: 5px;
-    z-index: 3;
+    border: none;
+    outline: none;
+    font-size: 1rem;
 }
 
 .search-button {
     margin-top: 10px;
-    padding: 10px 20px;
+    padding: 10px;
+    width: 100%;
     border: none;
     background-color: white;
     color: black;
@@ -73,7 +67,7 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     max-height: 150px;
     overflow-y: auto;
-    z-index: 5; /* Ensures dropdown appears above everything */
+    z-index: 5;
 }
 
 .dropdown-item {
@@ -88,29 +82,28 @@ body {
 
 .result-table {
     margin-top: 20px;
-    width: 80%;
-    max-width: 400px;
+    width: 100%;
     border-collapse: collapse;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    z-index: 3;
+    text-align: left;
 }
 
 .result-table td {
     border: 1px solid white;
-    padding: 8px;
+    padding: 10px;
+    color: white;
 }
 
 .error {
     color: red;
     font-weight: bold;
     margin-top: 20px;
-    z-index: 3;
 }
 
 .footer {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     color: white;
-    z-index: 3;
+    font-size: 0.8rem;
 }
