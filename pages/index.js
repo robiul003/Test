@@ -1,114 +1,70 @@
-import React, { useState } from "react";
-import ParticlesBackground from "../components/ParticlesBackground"; // Import the animation
+import { useState } from "react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 export default function Home() {
-    const [search, setSearch] = useState("");
-    const [result, setResult] = useState(null);
+  const [search, setSearch] = useState("");
+  const [selectedPerson, setSelectedPerson] = useState(null);
 
-    // Sample data
-    const persons = [
-        { name: "John Doe", info: "Software Engineer" },
-        { name: "Jane Smith", info: "Graphic Designer" },
-        { name: "Alice Brown", info: "Data Analyst" }
-    ];
+  const persons = [
+    { name: "Md Maruf", id: "242015312", mail: "242015312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Nimmi", id: "242016212", mail: "242016212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Kaiser Kamal Ifthe", id: "242018212", mail: "242018212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Mayesha", id: "242016112", mail: "242016112@eastdelta.edu.bd", status: "Currently doing preparation for CU admission test" },
+    { name: "Miftah Al Rahman", id: "242017212", mail: "242017212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Naim Uddin", id: "242016642", mail: "242016642@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Nusrat Jahan Antora", id: "242023212", mail: "242023212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Sadnan", id: "242017512", mail: "242017512@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Ibrahim Khan", id: "242017312", mail: "242017312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Saika Jahan", id: "242023312", mail: "242023312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Mohima", id: "242023112", mail: "242023112@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Md Robiul Hossain", id: "242014512", mail: "242014512@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" }
+  ];
 
-    // Search function
-    const handleSearch = () => {
-        const foundPerson = persons.find(
-            (person) => person.name.toLowerCase() === search.toLowerCase()
-        );
-        setResult(foundPerson ? foundPerson.info : "Updating data, Stay tune");
-    };
+  const filteredPersons = persons.filter(person =>
+    person.name.toLowerCase().includes(search.toLowerCase()) || person.id.includes(search)
+  );
 
-    return (
-        <div style={{
-            position: "relative",
-            textAlign: "center",
-            padding: "20px",
-            height: "100vh",
-            overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "#fff"
-        }}>
-            <ParticlesBackground />  {/* Particle animation added here */}
-
-            <h1 style={{
-                fontSize: "4rem",
-                fontWeight: "bold",
-                color: "#fff",
-                position: "relative",
-                zIndex: 1
-            }}>
-                NAGGINS
-            </h1>
-
-            <h2 style={{
-                color: "#fff",
-                position: "relative",
-                zIndex: 1
-            }}>
-                It is what it is
-            </h2>
-
-            <input
-                type="text"
-                placeholder="Name/ID"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{
-                    padding: "10px",
-                    width: "80%",
-                    maxWidth: "400px",
-                    margin: "10px auto",
-                    display: "block",
-                    borderRadius: "5px",
-                    position: "relative",
-                    zIndex: 1
-                }}
-            />
-
-            <button 
-                onClick={handleSearch}
-                style={{
-                    padding: "10px 20px",
-                    border: "none",
-                    backgroundColor: "#fff",
-                    color: "#000",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                    borderRadius: "5px",
-                    position: "relative",
-                    zIndex: 1
-                }}
-            >
-                SEARCH
-            </button>
-
-            {result && (
-                <p style={{
-                    marginTop: "20px",
-                    fontSize: "1.2rem",
-                    fontWeight: "bold",
-                    position: "relative",
-                    zIndex: 1
-                }}>
-                    {result}
-                </p>
-            )}
-
-            <footer style={{
-                position: "absolute",
-                bottom: "20px",
-                width: "100%",
-                textAlign: "center",
-                color: "#fff",
-                fontWeight: "bold"
-            }}>
-                © 2025 Md Robiul Hossain. All rights reserved.
-            </footer>
-        </div>
-    );
+  return (
+    <div className="container">
+      <Particles
+        init={loadFull}
+        options={{
+          background: { color: "#000" },
+          particles: { number: { value: 50 }, move: { enable: true, speed: 0.5 } } // Reduced speed to fix shaking
+        }}
+      />
+      <h1 className="title">NAGGINS</h1>
+      <p className="subtitle">It is what it is</p>
+      <input
+        type="text"
+        placeholder="Name/ID"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="search-bar"
+      />
+      {search && (
+        <ul className="search-results">
+          {filteredPersons.map((person) => (
+            <li key={person.id} onClick={() => setSelectedPerson(person)}>
+              <strong>{person.name}</strong> - Id: {person.id}
+            </li>
+          ))}
+        </ul>
+      )}
+      {selectedPerson && (
+        <table className="info-table">
+          <tbody>
+            {Object.entries(selectedPerson).map(([key, value]) => (
+              <tr key={key}>
+                <td>{key.charAt(0).toUpperCase() + key.slice(1)}</td>
+                <td>{value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      <footer>© 2025 Md Robiul Hossain. All rights reserved.</footer>
+    </div>
+  );
 }
