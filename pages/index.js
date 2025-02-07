@@ -193,8 +193,7 @@ export default function Home() {
                 width: "100%",
                 textAlign: "center",
                 color: "#fff",
-                fontWeight: "bold",
-                zIndex: 2 // Ensure footer appears above the background
+                fontWeight: "bold"
             }}>
                 © 2025 Md Robiul Hossain. All rights reserved.
             </footer>
