@@ -52,14 +52,13 @@ export default function Home() {
             position: "relative",
             textAlign: "center",
             padding: "20px",
-            height: "100vh",
-            overflow: "hidden",
+            minHeight: "100vh",  // Ensure content height is consistent
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             color: "#fff",
-            zIndex: 1 // Ensure content is above the background
+            zIndex: 1, // Ensure content is above the background
         }}>
             <ParticlesBackground />  {/* Particle animation added here */}
 
@@ -95,7 +94,8 @@ export default function Home() {
                     display: "block",
                     borderRadius: "5px",
                     position: "relative",
-                    zIndex: 2 // Ensure it appears above the background
+                    zIndex: 2, // Ensure it appears above the background
+                    marginBottom: "20px" // Add some space below the search bar
                 }}
             />
 
@@ -118,12 +118,12 @@ export default function Home() {
 
             <div>
                 {filteredPersons.length > 0 && (
-                    <ul style={{ listStyle: "none", padding: 0, zIndex: 2 }}>
+                    <ul style={{ listStyle: "none", padding: 0, zIndex: 2, marginBottom: "20px" }}>
                         {filteredPersons.map((person, index) => (
                             <li
                                 key={index}
                                 onClick={() => setSelectedPerson(person)} // Display detailed info on click
-                                style={{ cursor: "pointer", marginBottom: "10px" }}
+                                style={{ cursor: "pointer", marginBottom: "10px", zIndex: 2 }}
                             >
                                 <strong>{person.name}</strong><br />
                                 <span>Id: {person.id}</span>
@@ -134,24 +134,40 @@ export default function Home() {
             </div>
 
             {selectedPerson && (
-                <table style={{ marginTop: "20px", margin: "auto", color: "#fff", width: "80%", textAlign: "center", zIndex: 2 }}>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>ID</th>
-                            <th>Mail</th>
-                            <th>Program</th>
-                            <th>Semester</th>
-                            <th>Section</th>
-                        </tr>
-                    </thead>
+                <table style={{
+                    marginTop: "20px", 
+                    margin: "auto", 
+                    color: "#fff", 
+                    width: "80%", 
+                    textAlign: "left", 
+                    zIndex: 2, 
+                    border: "1px solid #fff", 
+                    padding: "10px", 
+                    borderRadius: "5px",
+                }}>
                     <tbody>
                         <tr>
+                            <td><strong>Name:</strong></td>
                             <td>{selectedPerson.name}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ID:</strong></td>
                             <td>{selectedPerson.id}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mail:</strong></td>
                             <td>{selectedPerson.mail}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Program:</strong></td>
                             <td>{selectedPerson.program}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Semester:</strong></td>
                             <td>{selectedPerson.semester}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Section:</strong></td>
                             <td>{selectedPerson.section}</td>
                         </tr>
                     </tbody>
