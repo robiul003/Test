@@ -58,7 +58,8 @@ export default function Home() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            color: "#fff"
+            color: "#fff",
+            zIndex: 1 // Ensure content is above the background
         }}>
             <ParticlesBackground />  {/* Particle animation added here */}
 
@@ -67,7 +68,7 @@ export default function Home() {
                 fontWeight: "bold",
                 color: "#fff",
                 position: "relative",
-                zIndex: 1
+                zIndex: 2 // Ensure it appears above the background
             }}>
                 NAGGINS
             </h1>
@@ -75,7 +76,7 @@ export default function Home() {
             <h2 style={{
                 color: "#fff",
                 position: "relative",
-                zIndex: 1
+                zIndex: 2 // Ensure it appears above the background
             }}>
                 It is what it is
             </h2>
@@ -94,7 +95,7 @@ export default function Home() {
                     display: "block",
                     borderRadius: "5px",
                     position: "relative",
-                    zIndex: 1
+                    zIndex: 2 // Ensure it appears above the background
                 }}
             />
 
@@ -109,7 +110,7 @@ export default function Home() {
                     cursor: "pointer",
                     borderRadius: "5px",
                     position: "relative",
-                    zIndex: 1
+                    zIndex: 2 // Ensure it appears above the background
                 }}
             >
                 SEARCH
@@ -117,7 +118,7 @@ export default function Home() {
 
             <div>
                 {filteredPersons.length > 0 && (
-                    <ul style={{ listStyle: "none", padding: 0, zIndex: 1 }}>
+                    <ul style={{ listStyle: "none", padding: 0, zIndex: 2 }}>
                         {filteredPersons.map((person, index) => (
                             <li
                                 key={index}
@@ -133,7 +134,7 @@ export default function Home() {
             </div>
 
             {selectedPerson && (
-                <table style={{ marginTop: "20px", margin: "auto", color: "#fff", width: "80%", textAlign: "center" }}>
+                <table style={{ marginTop: "20px", margin: "auto", color: "#fff", width: "80%", textAlign: "center", zIndex: 2 }}>
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -163,7 +164,8 @@ export default function Home() {
                 width: "100%",
                 textAlign: "center",
                 color: "#fff",
-                fontWeight: "bold"
+                fontWeight: "bold",
+                zIndex: 2 // Ensure footer appears above the background
             }}>
                 © 2025 Md Robiul Hossain. All rights reserved.
             </footer>
