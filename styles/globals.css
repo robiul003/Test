@@ -3,6 +3,7 @@ body {
     padding: 0;
     background-color: black;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 .container {
@@ -15,6 +16,17 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
+    z-index: 2;
+}
+
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .title {
@@ -31,12 +43,14 @@ body {
     position: relative;
     width: 80%;
     max-width: 400px;
+    z-index: 3; /* Ensures search box is above the background */
 }
 
 .search-bar {
     padding: 10px;
     width: 100%;
     border-radius: 5px;
+    z-index: 3;
 }
 
 .search-button {
@@ -59,7 +73,7 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     max-height: 150px;
     overflow-y: auto;
-    z-index: 10;
+    z-index: 5; /* Ensures dropdown appears above everything */
 }
 
 .dropdown-item {
@@ -77,6 +91,9 @@ body {
     width: 80%;
     max-width: 400px;
     border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    z-index: 3;
 }
 
 .result-table td {
@@ -88,10 +105,12 @@ body {
     color: red;
     font-weight: bold;
     margin-top: 20px;
+    z-index: 3;
 }
 
 .footer {
     position: absolute;
     bottom: 20px;
     color: white;
+    z-index: 3;
 }
