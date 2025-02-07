@@ -35,6 +35,13 @@ export default function Home() {
             person.id.includes(search)
     );
 
+    // Handle Enter key press
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            setSelectedPerson(filteredPersons[0]); // You can modify this to handle the selection logic
+        }
+    };
+
     return (
         <div style={{
             position: "relative",
@@ -73,6 +80,7 @@ export default function Home() {
                 placeholder="Name/ID"
                 value={search}
                 onChange={handleSearch}
+                onKeyPress={handleKeyPress} // Listen for Enter key press
                 style={{
                     padding: "10px",
                     width: "80%",
@@ -84,6 +92,23 @@ export default function Home() {
                     zIndex: 1
                 }}
             />
+
+            <button
+                onClick={() => setSelectedPerson(filteredPersons[0])} // For now, selecting first match
+                style={{
+                    padding: "10px 20px",
+                    border: "none",
+                    backgroundColor: "#fff",
+                    color: "#000",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                    borderRadius: "5px",
+                    position: "relative",
+                    zIndex: 1
+                }}
+            >
+                SEARCH
+            </button>
 
             <div>
                 {filteredPersons.length > 0 && (
