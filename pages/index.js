@@ -3,22 +3,37 @@ import ParticlesBackground from "../components/ParticlesBackground"; // Import t
 
 export default function Home() {
     const [search, setSearch] = useState("");
-    const [result, setResult] = useState(null);
+    const [selectedPerson, setSelectedPerson] = useState(null);
 
-    // Sample data
+    // Full data with Name, ID, Mail, Program, Semester, Section
     const persons = [
-        { name: "John Doe", info: "Software Engineer" },
-        { name: "Jane Smith", info: "Graphic Designer" },
-        { name: "Alice Brown", info: "Data Analyst" }
+        { name: "Md Maruf", id: "242015312", mail: "242015312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Nimmi", id: "242016212", mail: "242016212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Kaiser Kamal Ifthe", id: "242018212", mail: "242018212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Mayesha", id: "242016112", mail: "242016112@eastdelta.edu.bd", program: "Currently doing preparation for CU admission test", semester: "-", section: "-" },
+        { name: "Miftah Al Rahman", id: "242017212", mail: "242017212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Naim Uddin", id: "242016642", mail: "242016642@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Nusrat Jahan Antora", id: "242023212", mail: "242023212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Sadnan", id: "242017512", mail: "242017512@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Ibrahim Khan", id: "242017312", mail: "242017312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Saika Jahan", id: "242023312", mail: "242023312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Mohima", id: "242023112", mail: "242023112@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
+        { name: "Md Robiul Hossain", id: "242014512", mail: "242014512@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" }
     ];
 
-    // Search function
-    const handleSearch = () => {
-        const foundPerson = persons.find(
-            (person) => person.name.toLowerCase() === search.toLowerCase()
-        );
-        setResult(foundPerson ? foundPerson.info : "Updating data, Stay tune");
+    // Search function with live preview
+    const handleSearch = (e) => {
+        const searchQuery = e.target.value.toLowerCase();
+        setSearch(searchQuery);
+        setSelectedPerson(null);
     };
+
+    // Filter results based on name or ID
+    const filteredPersons = persons.filter(
+        (person) =>
+            person.name.toLowerCase().includes(search.toLowerCase()) ||
+            person.id.includes(search)
+    );
 
     return (
         <div style={{
@@ -57,7 +72,7 @@ export default function Home() {
                 type="text"
                 placeholder="Name/ID"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={handleSearch}
                 style={{
                     padding: "10px",
                     width: "80%",
@@ -70,33 +85,46 @@ export default function Home() {
                 }}
             />
 
-            <button 
-                onClick={handleSearch}
-                style={{
-                    padding: "10px 20px",
-                    border: "none",
-                    backgroundColor: "#fff",
-                    color: "#000",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                    borderRadius: "5px",
-                    position: "relative",
-                    zIndex: 1
-                }}
-            >
-                SEARCH
-            </button>
+            <div>
+                {filteredPersons.length > 0 && (
+                    <ul style={{ listStyle: "none", padding: 0, zIndex: 1 }}>
+                        {filteredPersons.map((person, index) => (
+                            <li
+                                key={index}
+                                onClick={() => setSelectedPerson(person)} // Display detailed info on click
+                                style={{ cursor: "pointer", marginBottom: "10px" }}
+                            >
+                                <strong>{person.name}</strong><br />
+                                <span>Id: {person.id}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
 
-            {result && (
-                <p style={{
-                    marginTop: "20px",
-                    fontSize: "1.2rem",
-                    fontWeight: "bold",
-                    position: "relative",
-                    zIndex: 1
-                }}>
-                    {result}
-                </p>
+            {selectedPerson && (
+                <table style={{ marginTop: "20px", margin: "auto", color: "#fff", width: "80%", textAlign: "center" }}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ID</th>
+                            <th>Mail</th>
+                            <th>Program</th>
+                            <th>Semester</th>
+                            <th>Section</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{selectedPerson.name}</td>
+                            <td>{selectedPerson.id}</td>
+                            <td>{selectedPerson.mail}</td>
+                            <td>{selectedPerson.program}</td>
+                            <td>{selectedPerson.semester}</td>
+                            <td>{selectedPerson.section}</td>
+                        </tr>
+                    </tbody>
+                </table>
             )}
 
             <footer style={{
