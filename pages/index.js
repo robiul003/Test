@@ -57,27 +57,28 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    fontFamily: "Arial, sans-serif"
+    fontFamily: "Arial, sans-serif",
+    padding: "0", // Remove any unnecessary border effect
+    margin: "0"
   },
   title: {
-    fontSize: "40px",
-    fontWeight: "bold",
+    fontSize: "50px", // Increased size
+    fontWeight: "900", // Extra bold
     padding: "10px",
-    border: "2px solid #fff",
-    display: "inline-block"
+    marginBottom: "10px"
   },
   subtitle: {
-    fontSize: "18px",
+    fontSize: "22px", // Slightly larger
     marginBottom: "20px"
   },
   updateText: {
     textTransform: "uppercase",
     letterSpacing: "2px",
-    fontSize: "14px",
+    fontSize: "16px", // Proportionally increased
     marginBottom: "20px"
   },
   input: {
-    padding: "10px",
+    padding: "12px",
     width: "80%",
     maxWidth: "400px",
     marginBottom: "10px",
@@ -85,14 +86,14 @@ const styles = {
     backgroundColor: "transparent",
     color: "#fff",
     textAlign: "center",
-    fontSize: "16px"
+    fontSize: "18px"
   },
   button: {
-    padding: "10px 20px",
+    padding: "12px 25px",
     backgroundColor: "transparent",
     color: "#fff",
     border: "2px solid #fff",
-    fontSize: "16px",
+    fontSize: "18px",
     cursor: "pointer"
   },
   resultBox: {
@@ -102,9 +103,9 @@ const styles = {
     display: "inline-block"
   },
   footer: {
-    position: "absolute",
-    bottom: "10px",
-    left: "10px",
-    fontSize: "12px"
+    marginTop: "auto", // Pushes footer to bottom
+    fontSize: "14px",
+    fontWeight: "bold",
+    textAlign: "center"
   }
 };
