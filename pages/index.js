@@ -1,137 +1,114 @@
-import { useState } from "react";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import React, { useState } from "react";
+import ParticlesBackground from "../components/ParticlesBackground"; // Import the animation
 
 export default function Home() {
-  const [search, setSearch] = useState("");
-  const [result, setResult] = useState(null);
+    const [search, setSearch] = useState("");
+    const [result, setResult] = useState(null);
 
-  const persons = [
-    { name: "John Doe", info: "Software Engineer" },
-    { name: "Jane Smith", info: "Graphic Designer" },
-    { name: "Alice Brown", info: "Data Analyst" }
-  ];
+    // Sample data
+    const persons = [
+        { name: "John Doe", info: "Software Engineer" },
+        { name: "Jane Smith", info: "Graphic Designer" },
+        { name: "Alice Brown", info: "Data Analyst" }
+    ];
 
-  const handleSearch = () => {
-    const foundPerson = persons.find(person =>
-      person.name.toLowerCase().includes(search.toLowerCase())
-    );
-    setResult(foundPerson ? foundPerson : "Updating data, Stay tune");
-  };
+    // Search function
+    const handleSearch = () => {
+        const foundPerson = persons.find(
+            (person) => person.name.toLowerCase() === search.toLowerCase()
+        );
+        setResult(foundPerson ? foundPerson.info : "Updating data, Stay tune");
+    };
 
-  return (
-    <div style={styles.container}>
-      {/* Particle Background */}
-      <Particles
-        id="tsparticles"
-        init={loadFull}
-        options={{
-          background: { color: "#000" },
-          particles: {
-            number: { value: 80 },
-            size: { value: 3 },
-            move: { speed: 2 },
-            color: { value: "#ffffff" },
-            links: { enable: true, color: "#ffffff", opacity: 0.5 }
-          }
-        }}
-        style={styles.particles}
-      />
+    return (
+        <div style={{
+            position: "relative",
+            textAlign: "center",
+            padding: "20px",
+            height: "100vh",
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "#fff"
+        }}>
+            <ParticlesBackground />  {/* Particle animation added here */}
 
-      <h1 style={styles.title}>NAGGINS</h1>
-      <p style={styles.subtitle}>It is what it is</p>
-      <p style={styles.updateText}>List are updating</p>
+            <h1 style={{
+                fontSize: "4rem",
+                fontWeight: "bold",
+                color: "#fff",
+                position: "relative",
+                zIndex: 1
+            }}>
+                NAGGINS
+            </h1>
 
-      <input
-        type="text"
-        placeholder="Name/ID"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={styles.input}
-      />
-      <button onClick={handleSearch} style={styles.button}>SEARCH</button>
+            <h2 style={{
+                color: "#fff",
+                position: "relative",
+                zIndex: 1
+            }}>
+                It is what it is
+            </h2>
 
-      {result && (
-        <div style={styles.resultBox}>
-          {typeof result === "string" ? (
-            <p>{result}</p>
-          ) : (
-            <p><strong>{result.name}</strong> - {result.info}</p>
-          )}
+            <input
+                type="text"
+                placeholder="Name/ID"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                    padding: "10px",
+                    width: "80%",
+                    maxWidth: "400px",
+                    margin: "10px auto",
+                    display: "block",
+                    borderRadius: "5px",
+                    position: "relative",
+                    zIndex: 1
+                }}
+            />
+
+            <button 
+                onClick={handleSearch}
+                style={{
+                    padding: "10px 20px",
+                    border: "none",
+                    backgroundColor: "#fff",
+                    color: "#000",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                    borderRadius: "5px",
+                    position: "relative",
+                    zIndex: 1
+                }}
+            >
+                SEARCH
+            </button>
+
+            {result && (
+                <p style={{
+                    marginTop: "20px",
+                    fontSize: "1.2rem",
+                    fontWeight: "bold",
+                    position: "relative",
+                    zIndex: 1
+                }}>
+                    {result}
+                </p>
+            )}
+
+            <footer style={{
+                position: "absolute",
+                bottom: "20px",
+                width: "100%",
+                textAlign: "center",
+                color: "#fff",
+                fontWeight: "bold"
+            }}>
+                © 2025 Md Robiul Hossain. All rights reserved.
+            </footer>
         </div>
-      )}
-
-      <p style={styles.footer}>© 2025 Md Robiul Hossain. All rights reserved.</p>
-    </div>
-  );
+    );
 }
-
-const styles = {
-  container: {
-    textAlign: "center",
-    color: "#fff",
-    minHeight: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    fontFamily: "Arial, sans-serif",
-    position: "relative",
-    overflow: "hidden"
-  },
-  particles: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    zIndex: -1
-  },
-  title: {
-    fontSize: "50px",
-    fontWeight: "900",
-    padding: "10px",
-    marginBottom: "10px"
-  },
-  subtitle: {
-    fontSize: "22px",
-    marginBottom: "20px"
-  },
-  updateText: {
-    textTransform: "uppercase",
-    letterSpacing: "2px",
-    fontSize: "16px",
-    marginBottom: "20px"
-  },
-  input: {
-    padding: "12px",
-    width: "80%",
-    maxWidth: "400px",
-    marginBottom: "10px",
-    border: "1px solid #fff",
-    backgroundColor: "transparent",
-    color: "#fff",
-    textAlign: "center",
-    fontSize: "18px"
-  },
-  button: {
-    padding: "12px 25px",
-    backgroundColor: "transparent",
-    color: "#fff",
-    border: "2px solid #fff",
-    fontSize: "18px",
-    cursor: "pointer"
-  },
-  resultBox: {
-    marginTop: "20px",
-    padding: "10px",
-    border: "1px solid #fff",
-    display: "inline-block"
-  },
-  footer: {
-    marginTop: "auto",
-    fontSize: "14px",
-    fontWeight: "bold",
-    textAlign: "center"
-  }
-};
