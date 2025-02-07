@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 import ParticlesBackground from "../components/ParticlesBackground"; // Import the animation
 
+const persons = [
+    { name: "Md Maruf", id: "242015312", mail: "242015312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Nimmi", id: "242016212", mail: "242016212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Kaiser Kamal Ifthe", id: "242018212", mail: "242018212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Mayesha", id: "242016112", mail: "242016112@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "Preparation for CU admission test", section: "N/A" },
+    { name: "Miftah Al Rahman", id: "242017212", mail: "242017212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Naim Uddin", id: "242016642", mail: "242016642@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Nusrat Jahan Antora", id: "242023212", mail: "242023212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Sadnan", id: "242017512", mail: "242017512@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Ibrahim Khan", id: "242017312", mail: "242017312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Saika Jahan", id: "242023312", mail: "242023312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Mohima", id: "242023112", mail: "242023112@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+    { name: "Md Robiul Hossain", id: "242014512", mail: "242014512@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd(running)", section: "07" },
+];
+
 export default function Home() {
     const [search, setSearch] = useState("");
     const [selectedPerson, setSelectedPerson] = useState(null);
     const [error, setError] = useState(false);
-
-    // Full data with Name, ID, Mail, Program, Semester, Section
-    const persons = [
-        { name: "Md Maruf", id: "242015312", mail: "242015312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Nimmi", id: "242016212", mail: "242016212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Kaiser Kamal Ifthe", id: "242018212", mail: "242018212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Mayesha", id: "242016112", mail: "242016112@eastdelta.edu.bd", program: "Currently doing preparation for CU admission test", semester: "-", section: "-" },
-        { name: "Miftah Al Rahman", id: "242017212", mail: "242017212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Naim Uddin", id: "242016642", mail: "242016642@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Nusrat Jahan Antora", id: "242023212", mail: "242023212@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Sadnan", id: "242017512", mail: "242017512@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Ibrahim Khan", id: "242017312", mail: "242017312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Saika Jahan", id: "242023312", mail: "242023312@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Mohima", id: "242023112", mail: "242023112@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" },
-        { name: "Md Robiul Hossain", id: "242014512", mail: "242014512@eastdelta.edu.bd", program: "B.Sc. in CSE", semester: "3rd (running)", section: "07" }
-    ];
 
     // Search function with live preview
     const handleSearch = () => {
@@ -36,17 +35,9 @@ export default function Home() {
         }
     };
 
-    // Filter results based on name or ID for live preview
-    const filteredPersons = persons.filter(
-        (person) =>
-            person.name.toLowerCase().includes(search.toLowerCase()) ||
-            person.id.includes(search)
-    );
-
-    // Handle Enter key press
-    const handleKeyPress = (e) => {
-        if (e.key === "Enter") {
-            handleSearch(); // Trigger search on Enter key press
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            handleSearch(); // Perform search when Enter key is pressed
         }
     };
 
@@ -120,51 +111,36 @@ export default function Home() {
             </button>
 
             {/* Display error message if no result is found */}
-            {error && <p style={{ color: "red", fontWeight: "bold" }}>No Naggins Found</p>}
+            {error && (
+                <p style={{
+                    color: "red",
+                    fontWeight: "bold",
+                    position: "relative",
+                    zIndex: 2 // Make sure the error message appears above background
+                }}>
+                    No Naggins Found
+                </p>
+            )}
 
-            <div>
-                {filteredPersons.length > 0 && (
-                    <ul style={{ listStyle: "none", padding: 0, zIndex: 2, marginBottom: "20px" }}>
-                        {filteredPersons.map((person, index) => (
-                            <li
-                                key={index}
-                                onClick={() => setSelectedPerson(person)} // Display detailed info on click
-                                style={{ cursor: "pointer", marginBottom: "10px", zIndex: 2 }}
-                            >
-                                <strong>{person.name}</strong><br />
-                                <span>Id: {person.id}</span>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-
+            {/* Display selected person details in a table format */}
             {selectedPerson && (
                 <table style={{
-                    marginTop: "20px", 
-                    margin: "auto", 
-                    color: "#fff", 
-                    width: "80%", 
-                    textAlign: "left", 
-                    zIndex: 2, 
-                    border: "1px solid #fff", 
-                    padding: "10px", 
-                    borderRadius: "5px",
-                    borderCollapse: "collapse", // Ensures borders are shared between cells
+                    marginTop: "20px",
+                    width: "80%",
+                    maxWidth: "500px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    textAlign: "left",
+                    borderCollapse: "collapse",
+                    zIndex: 2
                 }}>
-                    <thead>
-                        <tr>
-                            <th style={{ border: "1px solid #fff", padding: "8px" }}>Attribute</th>
-                            <th style={{ border: "1px solid #fff", padding: "8px" }}>Details</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
                             <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>Name:</strong></td>
                             <td style={{ border: "1px solid #fff", padding: "8px" }}>{selectedPerson.name}</td>
                         </tr>
                         <tr>
-                            <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>ID:</strong></td>
+                            <td style={{ border: "1px solid #fff", padding: "8px" }}><strong>Id:</strong></td>
                             <td style={{ border: "1px solid #fff", padding: "8px" }}>{selectedPerson.id}</td>
                         </tr>
                         <tr>
